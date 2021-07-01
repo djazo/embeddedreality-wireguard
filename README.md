@@ -4,12 +4,12 @@ Alpine 3.14 image with wireguard tools and wireguard-go userspace
 
 ## Usage:
 
-Surely you just rushed and did docker run before even thinking about reading this, so it gave you what ENV variables to set. Let's go through them.
-`ER_ADDRESS` VPN address of the host `ER_ADDRESS=192.168.200.1`
-`ER_PORT` UDP port to listen in, `ER_PORT=54321`
-`ER_KEYFILE` Filename with path to private key, `ER_KEYFILE=/secrets/keyfile`
-`ER_PEERS` Filename with path to peers file, `ER_PEERS=/secrets/peers`
-`ER_SUBNET` IP subnet where to add route to.  `ER_SUBNET=192.168.210.0`
+Surely you just rushed and did docker run before even thinking about reading this, so it gave you what ENV variables to set. Let's go through them:  
+`ER_ADDRESS` VPN address of the host `ER_ADDRESS=192.168.200.1`  
+`ER_PORT` UDP port to listen in, `ER_PORT=54321`  
+`ER_KEYFILE` Filename with path to private key, `ER_KEYFILE=/secrets/keyfile`  
+`ER_PEERS` Filename with path to peers file, `ER_PEERS=/secrets/peers`  
+`ER_SUBNET` IP subnet where to add route to.  `ER_SUBNET=192.168.210.0`  
 
 Keyfile is just file with one line, private key:
 ```
@@ -34,6 +34,15 @@ First create docker subnet that you want to have access from wg peers (clients),
 ```
 Then start the container:
 ```
-# docker run -d --mount source=secrets,target=/secrets -p 54321:54321/udp -e ER_ADDRESS=192.168.200.1 -e ER_PORT=54321 -e ER_KEYFILE=/secrets/privkey -e ER_PEERS=/secrets/peers -e ER_SUBNET=192.168.210.0 --network my-vpnstack --cap-add=NET_ADMIN Nembeddedreality/wireguard:1.0.0
+# docker run -d --mount source=secrets,target=/secrets \
+-p 54321:54321/udp \
+-e ER_ADDRESS=192.168.200.1 \
+-e ER_PORT=54321 \
+-e ER_KEYFILE=/secrets/privkey \
+-e ER_PEERS=/secrets/peers \
+-e ER_SUBNET=192.168.210.0 \
+--network my-vpnstack \
+--cap-add=NET_ADMIN \
+embeddedreality/wireguard:1.0.0
 ```
 
