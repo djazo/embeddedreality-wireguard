@@ -94,7 +94,7 @@ log "Adding peers"
 add_peers
 
 
-if [[ "x$1" == "xrun" ]]; then
+if [[ "$1"=="run" ]]; then
     log "Starting up interface"
     wg-quick up wg0
     forrest=true

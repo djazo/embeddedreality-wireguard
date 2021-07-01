@@ -14,4 +14,4 @@ ENV PATH="${PATH}:/opt/bin"
 COPY --from=bob /opt /opt
 
 ENTRYPOINT ["/opt/entrypoint.sh"]
-CMD run
+CMD ['run']
